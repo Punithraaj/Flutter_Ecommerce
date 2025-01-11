@@ -1,25 +1,21 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce/screens/authentication/loginScreen.dart';
-import 'package:gap/gap.dart';
-
+import 'package:flutter_ecommerce/screens/authentication/registeration_page.dart';
+import 'package:flutter_ecommerce/utils/utility.dart';
 import '../../utils/text_utils.dart';
-import '../../utils/utility.dart';
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-class RegisterationPage extends StatefulWidget {
   @override
-  _RegisterationPageState createState() => _RegisterationPageState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterationPageState extends State<RegisterationPage> {
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController cmfPassword = TextEditingController();
 
   bool checkBoxValue = true;
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +58,7 @@ class _RegisterationPageState extends State<RegisterationPage> {
                         child:TextFormField(
                           style: const TextStyle(color: Colors.white),
                           controller: email,
-                          autofocus: true,
+                          autovalidateMode: AutovalidateMode.onUnfocus,
                           decoration:const  InputDecoration(
                             suffixIcon: Icon(Icons.email_sharp,color: Colors.white,),
                             fillColor: Colors.white,
@@ -91,29 +87,27 @@ class _RegisterationPageState extends State<RegisterationPage> {
                               : "Password Sholud Contains 1 Upper Case Letter, 1 Lower Case Letter, 1 Number, 1 Special Character",
                         ),
                       ),
-                      const   Spacer(),
-                      TextUtil(text: "Confirm Password",),
-                      Container(
-                        height: 35,
-                        decoration:const  BoxDecoration(
-                            border: Border(bottom: BorderSide(color: Colors.white))
-                        ),
-                        child:TextFormField(
-                          style: const TextStyle(color: Colors.white),
-                          controller: cmfPassword,
-                          autovalidateMode: AutovalidateMode.onUnfocus,
-                          decoration:const  InputDecoration(
-                            suffixIcon: Icon(Icons.lock,color: Colors.white,),
-                            fillColor: Colors.white,
-                            border: InputBorder.none,),
-                          obscureText: true,
-                          validator: (input) =>
-                          input!.isPasswordMatching(password.text)
-                              ? null
-                              : "Password Not Matching",
-                        ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          Checkbox(
+                            side: BorderSide(
+                              color: Colors.white,
+                              width: 1.5,
+                            ),
+                            activeColor: Colors.green,
+                            value: checkBoxValue,
+                            checkColor: Colors.white,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                checkBoxValue = value!;
+                              });
+                            },
+                          ),
+                          const  SizedBox(width: 10,),
+                          Expanded(child: TextUtil(text: "Remember Me , FORGET PASSWORD",size: 12,weight: true,))
+                        ],
                       ),
-                      const   Spacer(),
                       const   Spacer(),
                       Container(
                         height: 40,
@@ -123,20 +117,20 @@ class _RegisterationPageState extends State<RegisterationPage> {
                             borderRadius: BorderRadius.circular(30)
                         ),
                         alignment: Alignment.center,
-                        child: TextUtil(text: "Register",color: Colors.black,),
+                        child: TextUtil(text: "Log In",color: Colors.black,),
                       ),
                       const   Spacer(),
                       Center(child:
                       InkWell(
                         onTap: () {
                           Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (_) => LoginScreen()));
+                              .push(MaterialPageRoute(builder: (_) => RegisterationPage()));
                         },
                         child:Text(
-                          "Sign In",
+                          "Don't have a account REGISTER",
                           style: TextStyle(decoration: TextDecoration.underline, color: Colors.deepPurpleAccent,fontSize: 16,fontWeight:FontWeight.bold),
                         )
-                      ),
+                        ),
                       ),
                       const   Spacer(),
                     ],

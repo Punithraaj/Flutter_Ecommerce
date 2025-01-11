@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utility.dart';
-import 'authentication/login_page.dart';
+import '../utils/utility.dart';
+import 'authentication/loginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
   void navigationPage() {
     Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+        .pushReplacement(MaterialPageRoute(builder: (_) => LoginScreen()));
   }
 
   @override
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                   Expanded(
                     child: Opacity(
                         opacity: opacity.value,
-                        child: Image.asset('logo.png')),
+                        child: Image.asset('assets/images/logo.png')),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

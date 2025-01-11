@@ -20,3 +20,19 @@ screenAwareSize(int size, BuildContext context) {
   double baseHeight = 640.0;
   return size * MediaQuery.of(context).size.height / baseHeight;
 }
+
+extension PasswordValidator on String {
+  bool isValidPassword() {
+    return RegExp(
+        r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+        .hasMatch(this);
+  }
+}
+
+extension PasswordMatcher on String {
+  bool isPasswordMatching(String password) {
+    print("password:"+password);
+    print("cmfpassword:"+this);
+    return this.compareTo(password) == 0 ? true : false;
+  }
+}
